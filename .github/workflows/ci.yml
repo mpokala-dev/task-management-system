@@ -19,10 +19,6 @@ jobs:
         with:
           node-version: 24
 
-      - name: Show package-lock checksum
-        run: |
-          sha256sum package-lock.json
-
       - name: Debug environment
         run: |
           echo "Node version:"
@@ -31,16 +27,31 @@ jobs:
           echo "NPM version:"
           npm -v
           npm config get engine-strict
-          cat package.json
 
           echo "Current commit:"
           git rev-parse HEAD
 
-          echo "Checking package-lock contains @emnapi/core?"
-          grep -n "@emnapi/core" package-lock.json || echo "@emnapi/core NOT FOUND"
-
       - name: Install dependencies
-        run: npm ci --verbose
+        shell: bash
+        run: |
+          set -o pipefail
+          npm ci --verbose 2>&1 | tee npm-ci.log
+
+      - name: Upload npm log
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-ci-log
+          path: npm-ci.log
+          if-no-files-found: warn
+
+      - name: Upload npm debug logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-debug-logs
+          path: /home/runner/.npm/_logs
+          if-no-files-found: warn
 
       - name: Run ESLint
         run: npm run lint
