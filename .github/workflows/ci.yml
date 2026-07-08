@@ -17,11 +17,30 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: "npm"
+          node-version: 24
+
+      - name: Show package-lock checksum
+        run: |
+          sha256sum package-lock.json
+
+      - name: Debug environment
+        run: |
+          echo "Node version:"
+          node -v
+
+          echo "NPM version:"
+          npm -v
+          npm config get engine-strict
+          cat package.json
+
+          echo "Current commit:"
+          git rev-parse HEAD
+
+          echo "Checking package-lock contains @emnapi/core?"
+          grep -n "@emnapi/core" package-lock.json || echo "@emnapi/core NOT FOUND"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --verbose
 
       - name: Run ESLint
         run: npm run lint
