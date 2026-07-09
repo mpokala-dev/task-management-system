@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import reactLogo from '../assets/svg/react.svg';
-import viteLogo from '../assets/svg/vite.svg';
-import heroImg from '../assets/images/hero.png';
+import reactLogo from '@assets/svg/react.svg';
+import viteLogo from '@assets/svg/vite.svg';
+import heroImg from '@assets/images/hero.png';
 import './App.css';
 
 function App() {
