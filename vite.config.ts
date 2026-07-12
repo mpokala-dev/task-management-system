@@ -18,7 +18,6 @@ export default defineConfig({
       '@constants': path.resolve(__dirname, './src/constants'),
       '@features': path.resolve(__dirname, './src/features'),
       '@pages': path.resolve(__dirname, './src/pages'),
-      '@layouts': path.resolve(__dirname, './src/layouts'),
       '@routes': path.resolve(__dirname, './src/routes'),
       '@services': path.resolve(__dirname, './src/services'),
       '@styles': path.resolve(__dirname, './src/styles'),
@@ -27,6 +26,8 @@ export default defineConfig({
       '@dashboard': path.resolve(__dirname, './src/features/dashboard'),
       '@auth': path.resolve(__dirname, './src/features/auth'),
       '@tasks': path.resolve(__dirname, './src/features/tasks'),
+      '@layouts/MainLayout': path.resolve(__dirname, './src/layouts/MainLayout'),
+      '@layouts/AuthLayout': path.resolve(__dirname, './src/layouts/AuthLayout'),
     },
   },
 });

@@ -4,18 +4,16 @@ Login
 Register
 Forgot Password
 
-<div className="auth-layout">
-   <Outlet />
-</div>
 
 **/
 
 import { Outlet } from 'react-router-dom';
+import styles from './AuthLayout.module.css';
 
 function AuthLayout() {
   return (
-    <div>
-      <main>
+    <div className={styles.root}>
+      <main className={styles.main}>
         <Outlet />
       </main>
     </div>

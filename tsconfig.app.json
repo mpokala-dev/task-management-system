@@ -26,7 +26,6 @@
       "@config/*": ["./src/config/*"],
       "@constants/*": ["./src/constants/*"],
       "@features/*": ["./src/features/*"],
-      "@layouts/*": ["./src/layouts/*"],
       "@pages/*": ["./src/pages/*"],
       "@routes/*": ["./src/routes/*"],
       "@services/*": ["./src/services/*"],
@@ -35,7 +34,9 @@
       "@types/*": ["./src/types/*"],
       "@dashboard/*": ["./src/features/dashboard/*"],
       "@auth/*": ["./src/features/auth/*"],
-      "@tasks/*": ["./src/features/tasks/*"]
+      "@tasks/*": ["./src/features/tasks/*"],
+      "@layouts/MainLayout/*": ["./src/layouts/MainLayout/*"],
+      "@layouts/AuthLayout/*": ["./src/layouts/AuthLayout/*"]
     },
 
     /* Linting */
