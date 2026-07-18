@@ -1,5 +1,6 @@
 // src/routes/AppRoute.tsx
 import { createBrowserRouter } from 'react-router-dom';
+import { ROUTES } from '@/constants/routes';
 import MainLayout from '@/layouts/MainLayout/MainLayout';
 import AuthLayout from '@/layouts/AuthLayout/AuthLayout';
 import Home from '@/pages/Home';
@@ -11,13 +12,16 @@ export const router = createBrowserRouter([
   {
     element: <MainLayout />,
     children: [
-      { path: '/', element: <Home /> },
-      { path: '/dashboard', element: <Dashboard /> },
+      { path: ROUTES.HOME, element: <Home /> },
+      { path: ROUTES.DASHBOARD, element: <Dashboard /> },
     ],
   },
   {
     element: <AuthLayout />,
-    children: [{ path: '/login', element: <Login /> }],
+    children: [{ path: ROUTES.LOGIN, element: <Login /> }],
   },
-  { path: '*', element: <NotFound /> },
+  {
+    path: ROUTES.NOT_FOUND,
+    element: <NotFound />,
+  },
 ]);
