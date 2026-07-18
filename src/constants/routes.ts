@@ -12,6 +12,6 @@ export const ROUTES = {
 } as const;
 
 export const routePath = {
-  taskDetails: (taskId: string) => `/tasks/${taskId}`,
-  projectDetails: (projectId: string) => `/projects/${projectId}`,
+  taskDetails: (taskId: string) => `${ROUTES.TASKS}/${taskId}`,
+  projectDetails: (projectId: string) => `${ROUTES.PROJECTS}/${projectId}`,
 } as const;
