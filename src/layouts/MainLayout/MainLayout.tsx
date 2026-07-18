@@ -10,13 +10,18 @@ Outlet
 <Outlet />
 <Footer />
 **/
-import { Outlet } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router-dom';
 import styles from './MainLayout.module.css';
+import { ROUTES } from '@/constants/routes';
 
 function MainLayout() {
   return (
     <div className={styles.root}>
-      <header className={styles.header}>Header placeholder</header>
+      <header className={styles.header}>
+        <NavLink to={ROUTES.HOME}>Home</NavLink>
+        <b> . </b>
+        <NavLink to={ROUTES.DASHBOARD}>Dashboard</NavLink>
+      </header>
       <main className={styles.main}>
         <Outlet />
       </main>
