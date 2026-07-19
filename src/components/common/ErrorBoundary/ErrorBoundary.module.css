@@ -1,0 +1,23 @@
+.fallback,
+.errorBoundary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  padding: var(--space-md);
+  text-align: center;
+  text-transform: uppercase;
+}
+.errorMessage {
+  font-family: var(--font-family);
+  font-size: var(--font-size-lg);
+  font-weight: normal;
+  color: var(--color-error);
+  background-color: var(--color-error-light);
+}
+.retryButton {
+  margin-top: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+}
