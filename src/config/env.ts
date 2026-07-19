@@ -12,13 +12,22 @@ interface EnvVarDefinition {
   fallback?: string;
 }
 
-const ENV_VARS: EnvVarDefinition[] = [
+const ENV_VARS: readonly EnvVarDefinition[] = [
   { key: 'VITE_API_BASE_URL', required: true, fallback: 'http://localhost:3000/api' },
 ];
 
 export interface EnvValidationResult {
   isValid: boolean;
   missing: string[];
+}
+
+function isValidUrl(value: string): boolean {
+  try {
+    new URL(value);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function validateEnv(): EnvValidationResult {
@@ -28,6 +37,8 @@ function validateEnv(): EnvValidationResult {
     const value = import.meta.env[varDef.key];
     if (!value && varDef.required && !varDef.fallback) {
       missing.push(varDef.key);
+    } else if (value && !isValidUrl(value)) {
+      missing.push(`${varDef.key} (invalid URL format)`);
     }
   }
 
@@ -43,6 +54,6 @@ if (!envValidation.isValid) {
   );
 }
 
-export const env = {
+export const env = Object.freeze({
   apiBaseUrl: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api',
-};
+});
