@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-// import { api } from '@/services/api';
 import { mockLogin } from '../services/mockAuthService';
-import { STORAGE_KEYS } from '@/constants/storage';
+import { authStorage } from '../services/authStorage';
 import type { AuthState, LoginCredentials, LoginResponse } from '../types';
 
 const initialState: AuthState = {
@@ -16,9 +15,6 @@ export const login = createAsyncThunk<LoginResponse, LoginCredentials, { rejectV
   'auth/login',
   async (credentials, { rejectWithValue }) => {
     try {
-      // TODO: swap mockLogin for a real api.post('/auth/login', credentials)
-      // call once the backend is available. LoginResponse shape is designed
-      // to match the expected real API contract.
       const response = await mockLogin(credentials);
       return response;
     } catch (error) {
@@ -37,7 +33,7 @@ const authSlice = createSlice({
       state.token = null;
       state.isAuthenticated = false;
       state.error = null;
-      localStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN);
+      authStorage.clear();
     },
     clearError: (state) => {
       state.error = null;
@@ -54,7 +50,7 @@ const authSlice = createSlice({
         state.isAuthenticated = true;
         state.user = action.payload.user;
         state.token = action.payload.token;
-        localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, action.payload.token);
+        authStorage.save(action.payload.token);
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
