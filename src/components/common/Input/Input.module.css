@@ -11,21 +11,29 @@
 }
 
 .input {
-  padding: var(--space-sm);
+  padding-block: var(--space-sm);
+  padding-inline: var(--space-sm);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   font-size: 1rem;
   width: 100%;
   box-sizing: border-box;
-}
+  transition:
+    border-color 0.15s ease,
+    outline-color 0.15s ease;
 
-.input:focus {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 1px;
-}
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 1px;
+  }
 
-.inputError {
-  border-color: var(--color-error, #ef4444);
+  /* :is() lets you group selectors that share a declaration —
+     here, both the error state class AND aria-invalid trigger
+     the same styling, so validation announced to screen readers
+     is visually consistent too */
+  &:is(.inputError, [aria-invalid='true']) {
+    border-color: var(--color-error, #ef4444);
+  }
 }
 
 .errorText {
