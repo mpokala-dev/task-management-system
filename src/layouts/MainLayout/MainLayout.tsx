@@ -10,17 +10,29 @@ Outlet
 <Outlet />
 <Footer />
 **/
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import styles from './MainLayout.module.css';
 import { ROUTES } from '@/constants/routes';
+import { useAppSelector } from '@/app/hooks';
+import { useLogout } from '@/features/auth/hooks/useLogout';
+import Button from '@components/common/Button';
 
 function MainLayout() {
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const handleLogout = useLogout();
+
   return (
     <div className={styles.root}>
       <header className={styles.header}>
-        <NavLink to={ROUTES.HOME}>Home</NavLink>
-        <b> . </b>
-        <NavLink to={ROUTES.DASHBOARD}>Dashboard</NavLink>
+        <Link to={ROUTES.HOME}>Home</Link>
+        {'  | '}
+        <Link to={ROUTES.DASHBOARD}>Dashboard</Link>
+        {isAuthenticated && '  | '}
+        {isAuthenticated && (
+          <Button variant="secondary" onClick={handleLogout} className={styles.logoutButton}>
+            Log out
+          </Button>
+        )}
       </header>
       <main className={styles.main}>
         <Outlet />

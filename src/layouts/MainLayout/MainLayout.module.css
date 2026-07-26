@@ -19,3 +19,7 @@
   padding: var(--space-md);
   box-sizing: border-box;
 }
+
+.logoutButton {
+  margin-inline-start: auto;
+}
