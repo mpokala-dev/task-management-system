@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { mockLogin } from '../services/mockAuthService';
+import { mockLogin, mockRestoreSession } from '../services/mockAuthService';
 import { authStorage } from '../services/authStorage';
-import type { AuthState, LoginCredentials, LoginResponse } from '../types';
+import type { AuthState, LoginCredentials, LoginResponse, User } from '../types';
 
 const initialState: AuthState = {
   user: null,
@@ -9,6 +9,7 @@ const initialState: AuthState = {
   isAuthenticated: false,
   loading: false,
   error: null,
+  sessionChecked: false,
 };
 
 export const login = createAsyncThunk<LoginResponse, LoginCredentials, { rejectValue: string }>(
@@ -19,6 +20,23 @@ export const login = createAsyncThunk<LoginResponse, LoginCredentials, { rejectV
       return response;
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Login failed';
+      return rejectWithValue(message);
+    }
+  },
+);
+
+export const restoreSession = createAsyncThunk<User, void, { rejectValue: string }>(
+  'auth/restoreSession',
+  async (_, { rejectWithValue }) => {
+    const token = authStorage.get();
+    if (!token) {
+      return rejectWithValue('No session found');
+    }
+    try {
+      return await mockRestoreSession(token);
+    } catch (error) {
+      authStorage.clear();
+      const message = error instanceof Error ? error.message : 'Session expired';
       return rejectWithValue(message);
     }
   },
@@ -55,6 +73,23 @@ const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload ?? 'Login failed';
+      })
+      .addCase(restoreSession.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(restoreSession.fulfilled, (state, action) => {
+        state.loading = false;
+        state.isAuthenticated = true;
+        state.user = action.payload;
+        state.token = authStorage.get();
+        state.sessionChecked = true;
+      })
+      .addCase(restoreSession.rejected, (state) => {
+        state.loading = false;
+        state.isAuthenticated = false;
+        state.user = null;
+        state.token = null;
+        state.sessionChecked = true;
       });
   },
 });

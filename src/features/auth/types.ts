@@ -10,6 +10,7 @@ export interface AuthState {
   isAuthenticated: boolean;
   loading: boolean;
   error: string | null;
+  sessionChecked: boolean;
 }
 
 export interface LoginCredentials {

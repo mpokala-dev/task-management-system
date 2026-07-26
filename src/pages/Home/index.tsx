@@ -9,9 +9,13 @@ function Home() {
 
   return (
     <>
-      <h1 style={{ color: theme.colors.primary }}>
-        Home Page {isAuthenticated ? ' logged in' : ' Sign up'}
-      </h1>
+      <h1 style={{ color: theme.colors.primary }}>Home Page</h1>
+      <h2 style={{ color: 'greenyellow' }}>
+        {' '}
+        {isAuthenticated
+          ? 'You are logged in, you can view Dashboard'
+          : 'Please Sign in to view Dashboard'}
+      </h2>
       <Link to={ROUTES.LOGIN}>Sign in</Link>
     </>
   );
