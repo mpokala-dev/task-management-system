@@ -1,0 +1,71 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--space-md);
+  box-sizing: border-box;
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+  padding: var(--space-xl);
+}
+
+.wordmark {
+  margin-block-end: var(--space-lg);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+  text-transform: uppercase;
+}
+
+.title {
+  margin-block-end: 2px;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.subtitle {
+  margin-block-start: 0;
+  margin-block-end: var(--space-xl);
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.passwordField {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.toggleButton {
+  position: absolute;
+  inset-block-start: 2rem;
+  inset-inline-end: var(--space-sm);
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: var(--space-xs);
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+.submitButton {
+  width: 100%;
+  margin-block-start: var(--space-xs);
+}

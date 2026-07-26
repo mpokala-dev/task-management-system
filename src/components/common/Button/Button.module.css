@@ -1,0 +1,53 @@
+.button {
+  /* Logical properties instead of top/bottom/left/right —
+     these adapt automatically for right-to-left languages */
+  padding-block: var(--space-sm);
+  padding-inline: var(--space-md);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    transform 0.1s ease;
+
+  /* Native CSS nesting — no preprocessor needed */
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  /* :focus-visible only shows the outline for keyboard users,
+     not on mouse click — better UX than plain :focus */
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+.primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+
+  &:not(:disabled):hover {
+    background-color: var(--color-primary-hover);
+  }
+}
+
+.secondary {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-border);
+
+  &:not(:disabled):hover {
+    background-color: var(--color-surface);
+  }
+}
