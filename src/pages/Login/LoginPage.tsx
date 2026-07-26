@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Card from '@/components/common/Card';
 import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
@@ -6,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { login } from '@/features/auth/store/authSlice';
 import { validateEmail, validatePassword } from '@/utils/validation';
 import styles from './LoginPage.module.css';
+import { ROUTES } from '@/constants/routes';
 
 interface FormErrors {
   email?: string;
@@ -14,12 +16,21 @@ interface FormErrors {
 
 function LoginPage() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
   const loading = useAppSelector((state) => state.auth.loading);
-
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      const from = (location.state as { from?: Location })?.from?.pathname ?? ROUTES.HOME;
+      navigate(from, { replace: true });
+    }
+  }, [isAuthenticated, location.state, navigate]);
 
   const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
