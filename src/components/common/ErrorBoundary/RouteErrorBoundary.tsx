@@ -1,4 +1,5 @@
 import { useNavigate, useRouteError, isRouteErrorResponse } from 'react-router-dom';
+import { logError } from '@/utils/errorLogger';
 import styles from './ErrorBoundary.module.css';
 
 function RouteErrorBoundary() {
@@ -11,7 +12,7 @@ function RouteErrorBoundary() {
   } else if (error instanceof Error) {
     message = error.message;
   }
-  console.log('Route error caught:', error);
+  logError('RouteErrorBoundary', error);
   return (
     <div className={styles.errorBoundary}>
       <h1>Oops!</h1>
