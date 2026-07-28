@@ -22,7 +22,6 @@ export const login = createAsyncThunk<LoginResponse, LoginCredentials, { rejectV
       return response;
     } catch (error) {
       logError('auth/login', error);
-      // const message = error instanceof Error ? error.message : 'Login failed';
       return rejectWithValue(getAuthErrorMessage(error));
     }
   },
@@ -39,7 +38,6 @@ export const restoreSession = createAsyncThunk<User, void, { rejectValue: string
       return await mockRestoreSession(token);
     } catch (error) {
       authStorage.clear();
-      // const message = error instanceof Error ? error.message : 'Session expired';
       logError('auth/restoreSession', error);
       return rejectWithValue(getAuthErrorMessage(error));
     }
