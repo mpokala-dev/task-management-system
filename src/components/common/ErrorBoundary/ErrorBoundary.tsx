@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import type { ErrorInfo } from 'react';
 import type { ErrorBoundaryProps, ErrorBoundaryState } from './ErrorBoundary.types';
+import { logError } from '@/utils/errorLogger';
 import styles from './ErrorBoundary.module.css';
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
@@ -14,7 +15,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
+    logError('ErrorBoundary', { error, errorInfo });
   }
 
   handleRetry = () => {

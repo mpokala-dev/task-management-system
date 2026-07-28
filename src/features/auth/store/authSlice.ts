@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { mockLogin, mockRestoreSession } from '../services/mockAuthService';
 import { authStorage } from '../services/authStorage';
+import { getAuthErrorMessage } from '../utils/getAuthErrorMessage';
+import { logError } from '@/utils/errorLogger';
 import type { AuthState, LoginCredentials, LoginResponse, User } from '../types';
 
 const initialState: AuthState = {
@@ -19,8 +21,8 @@ export const login = createAsyncThunk<LoginResponse, LoginCredentials, { rejectV
       const response = await mockLogin(credentials);
       return response;
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Login failed';
-      return rejectWithValue(message);
+      logError('auth/login', error);
+      return rejectWithValue(getAuthErrorMessage(error));
     }
   },
 );
@@ -36,8 +38,8 @@ export const restoreSession = createAsyncThunk<User, void, { rejectValue: string
       return await mockRestoreSession(token);
     } catch (error) {
       authStorage.clear();
-      const message = error instanceof Error ? error.message : 'Session expired';
-      return rejectWithValue(message);
+      logError('auth/restoreSession', error);
+      return rejectWithValue(getAuthErrorMessage(error));
     }
   },
 );

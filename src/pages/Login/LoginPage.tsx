@@ -4,7 +4,7 @@ import Card from '@/components/common/Card';
 import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { login } from '@/features/auth/store/authSlice';
+import { login, clearError } from '@/features/auth/store/authSlice';
 import { validateEmail, validatePassword } from '@/utils/validation';
 import styles from './LoginPage.module.css';
 import { ROUTES } from '@/constants/routes';
@@ -24,6 +24,7 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
+  const authError = useAppSelector((state) => state.auth.error);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -53,6 +54,11 @@ function LoginPage() {
         <p className={styles.wordmark}>TASK MANAGEMENT SYSTEM</p>
         <h1 className={styles.title}>Welcome back</h1>
         <p className={styles.subtitle}>Sign in to organise your work.</p>
+        {authError && (
+          <div className={styles.authError} role="alert">
+            {authError}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} noValidate className={styles.form}>
           <Input
@@ -67,6 +73,7 @@ function LoginPage() {
             onChange={(e) => {
               setEmail(e.target.value);
               if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
+              if (authError) dispatch(clearError());
             }}
           />
 
@@ -83,6 +90,7 @@ function LoginPage() {
               onChange={(e) => {
                 setPassword(e.target.value);
                 if (errors.password) setErrors((prev) => ({ ...prev, password: undefined }));
+                if (authError) dispatch(clearError());
               }}
             />
             <button
