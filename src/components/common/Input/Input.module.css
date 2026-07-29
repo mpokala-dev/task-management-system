@@ -1,0 +1,52 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  width: 100%;
+}
+
+.label {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.input {
+  padding-block: var(--space-sm);
+  padding-inline: var(--space-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  transition:
+    border-color 0.15s ease,
+    outline-color 0.15s ease;
+
+  &::placeholder {
+    font-size: 0.875rem;
+    font-weight: 100;
+    color: var(--color-text-placeholder);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 1px;
+  }
+
+  /* :is() lets you group selectors that share a declaration —
+     here, both the error state class AND aria-invalid trigger
+     the same styling, so validation announced to screen readers
+     is visually consistent too */
+  &:is(.inputError, [aria-invalid='true']) {
+    border-color: var(--color-error, #ef4444);
+  }
+}
+
+.requiredMark {
+  color: var(--color-error);
+}
+
+.errorText {
+  font-size: 0.8rem;
+  color: var(--color-error, #ef4444);
+}
