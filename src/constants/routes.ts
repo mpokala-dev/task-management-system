@@ -9,6 +9,7 @@ export const ROUTES = {
   USERS: '/users',
   SETTINGS: '/settings',
   NOT_FOUND: '*',
+  SAMPLE_DASHBOARD: '/sample_dashboard',
 } as const;
 
 export const routePath = {

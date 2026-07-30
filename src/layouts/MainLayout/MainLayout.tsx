@@ -26,7 +26,7 @@ function MainLayout() {
       <header className={styles.header}>
         <Link to={ROUTES.HOME}>Home</Link>
         {'  | '}
-        <Link to={ROUTES.DASHBOARD}>Dashboard</Link>
+        <Link to={ROUTES.SAMPLE_DASHBOARD}>Dashboard</Link>
         {isAuthenticated && '  | '}
         {isAuthenticated && (
           <Button variant="secondary" onClick={handleLogout} className={styles.logoutButton}>
