@@ -3,7 +3,6 @@ import { ROUTES } from '@/constants/routes';
 
 function TaskDetail() {
   const { id } = useParams<{ id: string }>();
-  console.log('params::', useParams());
 
   return (
     <section aria-label="Task details">
