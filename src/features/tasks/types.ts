@@ -13,4 +13,5 @@ export interface TaskState {
   recentTasks: Task[];
   loading: boolean;
   error: string | null;
+  initialized: boolean;
 }

@@ -13,11 +13,13 @@ const STATUS_LABELS: Record<string, string> = {
 
 function RecentTasksWidget() {
   const dispatch = useAppDispatch();
-  const { recentTasks, loading, error } = useAppSelector((state) => state.tasks);
+  const { recentTasks, loading, error, initialized } = useAppSelector((state) => state.tasks);
 
   useEffect(() => {
-    dispatch(loadRecentTasks());
-  }, [dispatch]);
+    if (!initialized && !loading) {
+      dispatch(loadRecentTasks());
+    }
+  }, [dispatch, initialized, loading]);
 
   return (
     <section className={styles.widget} aria-labelledby="recent-tasks-heading">
