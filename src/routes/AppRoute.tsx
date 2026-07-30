@@ -9,6 +9,7 @@ import Dashboard from '@/pages/Dashboard';
 import NotFound from '@/pages/NotFound';
 import { ROUTES } from '@/constants/routes';
 import RouteErrorBoundary from '@/components/common/ErrorBoundary/RouteErrorBoundary';
+import DashboardLayout from '@/layouts/DashboardLayout/DashboardLayout';
 
 export const router = createBrowserRouter([
   {
@@ -17,8 +18,17 @@ export const router = createBrowserRouter([
     children: [
       { path: ROUTES.HOME, element: <Home /> },
       {
-        element: <ProtectedRoute />,
         errorElement: <RouteErrorBoundary />,
+        children: [{ path: ROUTES.SAMPLE_DASHBOARD, element: <Dashboard /> }],
+      },
+    ],
+  },
+  {
+    element: <ProtectedRoute />,
+    errorElement: <RouteErrorBoundary />,
+    children: [
+      {
+        element: <DashboardLayout />,
         children: [{ path: ROUTES.DASHBOARD, element: <Dashboard /> }],
       },
     ],
