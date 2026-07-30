@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
       { path: ROUTES.HOME, element: <Home /> },
       {
         errorElement: <RouteErrorBoundary />,
-        children: [{ path: ROUTES.SAMPLE_DASHBOARD, element: <Dashboard /> }],
+        children: [{ path: ROUTES.SAMPLE_DASHBOARD, element: <Dashboard forcePreview={true} /> }],
       },
     ],
   },

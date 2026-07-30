@@ -1,24 +1,25 @@
 import { useAppSelector } from '@/app/hooks';
 import { Handshake } from 'lucide-react';
+import styles from './Dashboard.module.css';
 
-function Dashboard() {
+interface DashboardProps {
+  forcePreview?: boolean;
+}
+
+function Dashboard({ forcePreview = false }: DashboardProps) {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const user = useAppSelector((state) => state.auth.user);
-  if (isAuthenticated)
+  if (isAuthenticated && !forcePreview)
     return (
-      <section aria-label="Dahboard navigation" aria-description="Welcome Section">
-        <h2 style={{ display: 'flex', flexDirection: 'row', backgroundColor: 'yellowgreen' }}>
-          Welcome, {user?.name} !{' '}
-          <Handshake style={{ marginLeft: '2px' }} size={30} aria-hidden={true} />
+      <section aria-label="Dahboard welcome">
+        <h2 className={styles.welcomeHeading}>
+          Welcome, {user?.name}! <Handshake aria-hidden="true" size={30} />
         </h2>
-        <h3 style={{ backgroundColor: 'cyan' }}>Here's an overview of your workspace.</h3>
+        <p>Here's an overview of your workspace.</p>
       </section>
     );
   return (
-    <h1
-      aria-label="Dahboard navigation"
-      aria-description="This is a preview of the dashboard. Sign in to access your personalised workspace."
-    >
+    <h1 aria-label="Dahboard welcome">
       This is a preview of the dashboard. Sign in to access your personalised workspace.
     </h1>
   );
