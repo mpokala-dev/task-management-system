@@ -2,6 +2,7 @@ import { useAppSelector } from '@/app/hooks';
 import { Handshake } from 'lucide-react';
 import SummaryCards from '@features/dashboard/components/SummaryCards/SummaryCards';
 import RecentTasksWidget from '@/features/dashboard/components/RecentTasksWidget/RecentTasksWidget';
+import TaskStatisticsWidget from '@/features/dashboard/components/TaskStatisticsWidget/TaskStatisticsWidget';
 import styles from './Dashboard.module.css';
 
 interface DashboardProps {
@@ -20,7 +21,10 @@ function Dashboard({ forcePreview = false }: DashboardProps) {
         <p className={styles.subtitle}>Here's an overview of your workspace.</p>
         <div className={styles.sections}>
           <SummaryCards />
-          <RecentTasksWidget />
+          <div className={styles.widgetRow}>
+            <RecentTasksWidget />
+            <TaskStatisticsWidget />
+          </div>
         </div>
       </section>
     );

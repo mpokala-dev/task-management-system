@@ -8,6 +8,7 @@ const initialState: TaskState = {
   recentTasks: [],
   loading: false,
   error: null,
+  initialized: false,
 };
 
 export const loadRecentTasks = createAsyncThunk<Task[], void, { rejectValue: string }>(
@@ -35,10 +36,12 @@ const taskSlice = createSlice({
       .addCase(loadRecentTasks.fulfilled, (state, action) => {
         state.loading = false;
         state.recentTasks = action.payload;
+        state.initialized = true;
       })
       .addCase(loadRecentTasks.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload ?? 'Unable to load recent tasks.';
+        state.initialized = true;
       });
   },
 });

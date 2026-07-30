@@ -24,11 +24,15 @@
   flex-direction: column;
   gap: var(--space-xs);
   min-width: 0;
+  flex: 1;
 }
 
 .label {
   font-size: 0.8rem;
   color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .value {
