@@ -1,0 +1,26 @@
+.welcomeHeading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.subtitle {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+}
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin-block-start: var(--space-lg);
+}
+.widgetRow {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--space-lg);
+}
+
+@media (max-width: 768px) {
+  .widgetRow {
+    grid-template-columns: 1fr;
+  }
+}
