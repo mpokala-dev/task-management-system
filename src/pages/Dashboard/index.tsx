@@ -1,5 +1,6 @@
 import { useAppSelector } from '@/app/hooks';
 import { Handshake } from 'lucide-react';
+import SummaryCards from '@features/dashboard/components/SummaryCards/SummaryCards';
 import styles from './Dashboard.module.css';
 
 interface DashboardProps {
@@ -16,6 +17,7 @@ function Dashboard({ forcePreview = false }: DashboardProps) {
           Welcome, {user?.name}! <Handshake aria-hidden="true" size={30} />
         </h2>
         <p>Here's an overview of your workspace.</p>
+        <SummaryCards />
       </section>
     );
   return (
