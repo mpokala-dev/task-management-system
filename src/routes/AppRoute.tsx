@@ -10,6 +10,7 @@ import NotFound from '@/pages/NotFound';
 import { ROUTES } from '@/constants/routes';
 import RouteErrorBoundary from '@/components/common/ErrorBoundary/RouteErrorBoundary';
 import DashboardLayout from '@/layouts/DashboardLayout/DashboardLayout';
+import TaskDetail from '@/pages/TaskDetail';
 
 export const router = createBrowserRouter([
   {
@@ -29,7 +30,10 @@ export const router = createBrowserRouter([
     children: [
       {
         element: <DashboardLayout />,
-        children: [{ path: ROUTES.DASHBOARD, element: <Dashboard /> }],
+        children: [
+          { path: ROUTES.DASHBOARD, element: <Dashboard /> },
+          { path: ROUTES.TASK_DETAIL, element: <TaskDetail /> },
+        ],
       },
     ],
   },

@@ -3,7 +3,7 @@ export const ROUTES = {
   LOGIN: '/login',
   DASHBOARD: '/dashboard',
   TASKS: '/tasks',
-  TASK_DETAILS: '/tasks/:taskId',
+  TASK_DETAIL: '/tasks/:id',
   PROJECTS: '/projects',
   PROJECT_DETAILS: '/projects/:projectId',
   USERS: '/users',
@@ -12,7 +12,6 @@ export const ROUTES = {
   SAMPLE_DASHBOARD: '/sample_dashboard',
 } as const;
 
-export const routePath = {
-  taskDetails: (taskId: string) => `${ROUTES.TASKS}/${taskId}`,
-  projectDetails: (projectId: string) => `${ROUTES.PROJECTS}/${projectId}`,
-} as const;
+export function buildTaskDetailPath(id: string): string {
+  return `/tasks/${id}`;
+}

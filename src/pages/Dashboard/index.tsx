@@ -1,6 +1,7 @@
 import { useAppSelector } from '@/app/hooks';
 import { Handshake } from 'lucide-react';
 import SummaryCards from '@features/dashboard/components/SummaryCards/SummaryCards';
+import RecentTasksWidget from '@/features/dashboard/components/RecentTasksWidget/RecentTasksWidget';
 import styles from './Dashboard.module.css';
 
 interface DashboardProps {
@@ -17,7 +18,10 @@ function Dashboard({ forcePreview = false }: DashboardProps) {
           Welcome, {user?.name}! <Handshake aria-hidden="true" size={30} />
         </h2>
         <p className={styles.subtitle}>Here's an overview of your workspace.</p>
-        <SummaryCards />
+        <div className={styles.sections}>
+          <SummaryCards />
+          <RecentTasksWidget />
+        </div>
       </section>
     );
   return (
