@@ -3,3 +3,7 @@
   align-items: center;
   gap: var(--space-sm);
 }
+.subtitle {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+}
